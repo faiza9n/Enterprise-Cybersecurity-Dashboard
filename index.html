@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Enterprise Cybersecurity Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>CyberSecure</h2>
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li><a href="#" class="active">Dashboard</a></li>
+
+                <li><a href="#">Threat Monitoring</a></li>
+
+                <li><a href="#">User Management</a></li>
+
+                <li><a href="#">Analytics</a></li>
+
+                <li><a href="#">Reports</a></li>
+
+                <li><a href="#">Settings</a></li>
+
+                <li><a href="#">Profile</a></li>
+
+                <li><a href="#">Logout</a></li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- Header -->
+
+        <header class="header">
+
+            <input type="text" placeholder="Search...">
+
+            <div class="header-right">
+
+                <button>Notifications</button>
+
+                <button>Theme</button>
+
+                <div class="profile">
+
+                    <span>Faizan</span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Dashboard -->
+
+        <section class="dashboard">
+
+            <h1>Enterprise Cybersecurity Dashboard</h1>
+
+            <!-- Statistic Cards -->
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>Security Score</h3>
+
+                    <p>92%</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Threats Today</h3>
+
+                    <p>18</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Active Users</h3>
+
+                    <p>156</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Critical Alerts</h3>
+
+                    <p>3</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Servers Online</h3>
+
+                    <p>48</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Login Attempts</h3>
+
+                    <p>1240</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Network Health</h3>
+
+                    <p>Excellent</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Firewall Status</h3>
+
+                    <p>Protected</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Charts -->
+
+        <section class="charts">
+
+            <div class="chart-box">
+
+                <h2>Threat Trend</h2>
+
+                <canvas id="threatTrend"></canvas>
+
+            </div>
+
+            <div class="chart-box">
+
+                <h2>Threat Categories</h2>
+
+                <canvas id="threatCategory"></canvas>
+
+            </div>
+
+            <div class="chart-box">
+
+                <h2>Login Activity</h2>
+
+                <canvas id="loginChart"></canvas>
+
+            </div>
+
+            <div class="chart-box">
+
+                <h2>Monthly Incidents</h2>
+
+                <canvas id="incidentChart"></canvas>
+
+            </div>
+
+            <div class="chart-box">
+
+                <h2>Device Distribution</h2>
+
+                <canvas id="deviceChart"></canvas>
+
+            </div>
+
+        </section>
+
+        <!-- Threat Monitoring -->
+
+        <section class="threat-table">
+
+            <h2>Threat Monitoring</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Threat</th>
+
+                        <th>Severity</th>
+
+                        <th>Status</th>
+
+                        <th>Source</th>
+
+                        <th>Time</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>TH001</td>
+
+                        <td>Malware</td>
+
+                        <td>Critical</td>
+
+                        <td>Blocked</td>
+
+                        <td>192.168.1.25</td>
+
+                        <td>09:30 AM</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- User Management -->
+
+        <section class="users">
+
+            <h2>User Management</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+
+                        <th>Department</th>
+
+                        <th>Role</th>
+
+                        <th>Status</th>
+
+                        <th>Last Login</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>Faizan Khan</td>
+
+                        <td>Security</td>
+
+                        <td>Administrator</td>
+
+                        <td>Active</td>
+
+                        <td>Today</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- Reports -->
+
+        <section class="reports">
+
+            <h2>Reports</h2>
+
+            <button>Download PDF</button>
+
+            <button>Download Excel</button>
+
+            <button>Download CSV</button>
+
+        </section>
+
+        <!-- Settings -->
+
+        <section class="settings">
+
+            <h2>Settings</h2>
+
+            <label>
+
+                <input type="checkbox">
+
+                Enable Notifications
+
+            </label>
+
+            <label>
+
+                <input type="checkbox">
+
+                Two Factor Authentication
+
+            </label>
+
+        </section>
+
+        <!-- Profile -->
+
+        <section class="profile-section">
+
+            <h2>Profile</h2>
+
+            <form>
+
+                <input type="text" placeholder="Name">
+
+                <input type="email" placeholder="Email">
+
+                <input type="text" placeholder="Phone">
+
+                <input type="text" placeholder="Department">
+
+                <input type="text" placeholder="Designation">
+
+                <button type="submit">Save</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Chart.js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JavaScript Files -->
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/threats.js"></script>
+    <script src="assets/js/users.js"></script>
+    <script src="assets/js/reports.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/profile.js"></script>
+
+</body>
+
+</html>
