@@ -189,11 +189,13 @@
 
                 <button class="icon-btn">
 
-                    <i class="fa-regular fa-bell"></i>
+                 <i class="fa-regular fa-bell"></i>
 
                 </button>
 
-                <button class="icon-btn">
+                <button
+                    id="themeToggleBtn"
+                    class="icon-btn">
 
                     <i class="fa-solid fa-moon"></i>
 
@@ -202,7 +204,7 @@
                 <div class="profile">
 
                     <img src="assets/images/Mclovin.webp"
-                         alt="Profile">
+                        alt="Profile">
 
                     <div class="profile-info">
 
@@ -215,12 +217,12 @@
                 </div>
 
             </div>
-
         </header>
 
-                <!-- =======================
+
+        <!-- =======================
                 DASHBOARD
-        ======================== -->
+         ======================== -->
 
         <!-- <section id="dashboard" class="dashboard"> -->
         <section id="dashboard" class="dashboard page-section active-page">
@@ -469,87 +471,136 @@
 
         </section>
 
-                <!-- =======================
-                THREAT MONITORING
-        ======================== -->
 
-        <section id="threats" class="content-section page-section">
 
-            <div class="section-header">
+        <!-- =======================
+        THREAT MONITORING
+======================== -->
 
-                <h2>Threat Monitoring</h2>
+<section id="threats" class="content-section page-section">
 
-                <div class="table-controls">
+    <div class="section-header">
 
-                    <input
-                        type="text"
-                        placeholder="Search Threat...">
+        <h2>Threat Monitoring</h2>
 
-                    <select>
+        <div class="table-controls">
 
-                        <option>All Severity</option>
-                        <option>Critical</option>
-                        <option>High</option>
-                        <option>Medium</option>
-                        <option>Low</option>
+            <input
+                id="threatSearch"
+                type="text"
+                placeholder="Search Threat...">
 
-                    </select>
+            <select id="severityFilter">
 
-                </div>
+                <option>All Severity</option>
+                <option>Critical</option>
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
 
-            </div>
+            </select>
 
-            <table>
+        </div>
 
-                <thead>
+    </div>
 
-                    <tr>
+    <table>
 
-                        <th>ID</th>
-                        <th>Threat</th>
-                        <th>Severity</th>
-                        <th>Status</th>
-                        <th>Source</th>
-                        <th>Time</th>
+        <thead>
 
-                    </tr>
+            <tr>
 
-                </thead>
+                <th>ID</th>
+                <th>Threat</th>
+                <th>Severity</th>
+                <th>Status</th>
+                <th>Source</th>
+                <th>Time</th>
 
-                <tbody>
+            </tr>
 
-                    <tr>
-                        <td>TH001</td>
-                        <td>Malware</td>
-                        <td>Critical</td>
-                        <td>Blocked</td>
-                        <td>192.168.1.20</td>
-                        <td>09:15</td>
-                    </tr>
+        </thead>
 
-                    <tr>
-                        <td>TH002</td>
-                        <td>Phishing</td>
-                        <td>High</td>
-                        <td>Investigating</td>
-                        <td>Email Gateway</td>
-                        <td>10:42</td>
-                    </tr>
+        <tbody>
 
-                    <tr>
-                        <td>TH003</td>
-                        <td>DDoS</td>
-                        <td>Medium</td>
-                        <td>Resolved</td>
-                        <td>Firewall</td>
-                        <td>12:25</td>
-                    </tr>
+            <tr>
 
-                </tbody>
+                <td>TH001</td>
 
-            </table>
+                <td>Malware</td>
 
-        </section>
+                <td>Critical</td>
+
+                <td>
+                    <span class="status blocked">
+                        Blocked
+                    </span>
+                </td>
+
+                <td>192.168.1.20</td>
+
+                <td>09:15</td>
+
+            </tr>
+
+            <tr>
+
+                <td>TH002</td>
+
+                <td>Phishing</td>
+
+                <td>High</td>
+
+                <td>
+                    <span class="status monitoring">
+                        Investigating
+                    </span>
+                </td>
+
+                <td>Email Gateway</td>
+
+                <td>10:42</td>
+
+            </tr>
+
+            <tr>
+
+                <td>TH003</td>
+
+                <td>DDoS</td>
+
+                <td>Medium</td>
+
+                <td>
+                    <span class="status resolved">
+                        Resolved
+                    </span>
+                </td>
+
+                <td>Firewall</td>
+
+                <td>12:25</td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <div
+        id="noThreatsFound"
+        class="empty-state hidden">
+
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        <h3>No Threats Found</h3>
+
+        <p>Try adjusting your search or filter.</p>
+
+    </div>
+
+</section>
+
 
         <!-- =======================
                 USER MANAGEMENT
@@ -557,11 +608,29 @@
 
         <section id="users" class="content-section page-section">
 
-            <div class="section-header">
+            <!-- <div class="section-header">
 
                 <h2>User Management</h2>
 
-            </div>
+            </div> -->
+
+            <div class="section-header">
+
+    <h2>User Management</h2>
+
+    <!-- <button id="addUserBtn" class="btn"> -->
+    <button
+    type="button"
+    id="addUserBtn"
+    class="btn">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Add User
+
+    </button>
+
+</div>
 
             <table>
 
@@ -580,24 +649,43 @@
 
                 </thead>
 
-                <tbody>
+                <tbody id="usersTableBody">
 
                     <tr>
 
                         <td>Faizan Khan</td>
                         <td>Security</td>
                         <td>Administrator</td>
-                        <td>Active</td>
+                        <!-- <td>Active</td> -->
+
+                        <td> 
+                        <span class="status active">
+
+                            Active
+
+                        </span>
+                        </td>
+
                         <td>Today</td>
 
                         <td>
+                            <button type="button" class="btn view-btn">
 
-                            <button>View</button>
+                                View
 
-                            <button>Edit</button>
+                            </button>
 
-                            <button>Delete</button>
+                            <button type="button" class="btn edit-btn">
 
+                                Edit
+
+                            </button>
+
+                            <button type="button" class="btn delete-btn">
+
+                                Delete
+
+                            </button>
                         </td>
 
                     </tr>
@@ -605,6 +693,18 @@
                 </tbody>
 
             </table>
+
+            <div
+                id="noUsersFound"
+                class="empty-state hidden">
+
+                <i class="fa-solid fa-users-slash"></i>
+
+                <h3>No Users Found</h3>
+
+                <p>Add a new user to get started.</p>
+
+            </div>
 
         </section>
 
@@ -618,11 +718,11 @@
 
             <div class="report-buttons">
 
-                <button>Download PDF</button>
+                <button id="downloadPdfBtn">Download PDF</button>
 
-                <button>Download Excel</button>
+                <button id="downloadExcelBtn">Download Excel</button>
 
-                <button>Download CSV</button>
+                <button id="downloadCsvBtn">Download CSV</button>
 
             </div>
 
@@ -640,7 +740,8 @@
 
                 <label>
 
-                    <input type="checkbox">
+                    <input type="checkbox"
+                    id="notificationsToggle">
 
                     Enable Notifications
 
@@ -648,7 +749,8 @@
 
                 <label>
 
-                    <input type="checkbox">
+                    <input type="checkbox"
+                    id="autoLogoutToggle">
 
                     Auto Logout
 
@@ -656,7 +758,8 @@
 
                 <label>
 
-                    <input type="checkbox">
+                    <input type="checkbox"
+                    id="twoFactorToggle">
 
                     Two-Factor Authentication
 
@@ -664,7 +767,8 @@
 
                 <label>
 
-                    <input type="checkbox">
+                    <input type="checkbox"
+                    id="darkModeToggle">
 
                     Dark Mode
 
@@ -756,7 +860,7 @@
             MODAL
     ======================== -->
 
-    <div class="modal">
+    <!-- <div class="modal">
 
         <div class="modal-content">
 
@@ -776,7 +880,41 @@
 
         </div>
 
+    </div> -->
+
+<div id="customModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2 id="modalTitle"></h2>
+
+        <div id="modalBody"></div>
+
+        <div class="modal-actions">
+
+            <button
+                id="modalCancelBtn"
+                type="button"
+                class="btn btn-danger">
+
+                Cancel
+
+            </button>
+
+            <button
+                id="modalConfirmBtn"
+                type="button"
+                class="btn btn-primary">
+
+                Confirm
+
+            </button>
+
+        </div>
+
     </div>
+
+</div>
 
     <!-- =======================
             LOADING SPINNER
@@ -792,10 +930,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    
+    <!-- Toast -->
+
+    <div id="toast" class="toast">
+
+        <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+
+        <span id="toastMessage"></span>
+
+    </div>
+
+    
     <!-- JavaScript Files -->
 
     <script src="assets/js/app.js"></script>
-    <!-- <section id="dashboard" class="dashboard page-section active-page"> -->
 
     <script src="assets/js/dashboard.js"></script>
 
@@ -805,6 +954,10 @@
 
     <script src="assets/js/threats.js"></script>
 
+    <script src="assets/js/modal.js"></script>
+
+    <script src="assets/js/toast.js"></script>
+
     <script src="assets/js/users.js"></script>
 
     <script src="assets/js/reports.js"></script>
@@ -812,6 +965,7 @@
     <script src="assets/js/settings.js"></script>
 
     <script src="assets/js/profile.js"></script>
+
 
 </body>
 

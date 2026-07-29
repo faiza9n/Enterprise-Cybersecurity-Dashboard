@@ -436,7 +436,9 @@ table{
 
     border-radius:var(--radius-md);
 
-    background:white;
+    /* background:white; */
+    background: var(--surface-color);
+    color: var(--text-dark);
 
     transition:var(--transition);
 
@@ -476,7 +478,9 @@ table{
 
     border-radius:50%;
 
-    background:white;
+    /* background:white; */
+    background: var(--surface-color);
+    color: var(--text-dark);
 
     box-shadow:var(--shadow);
 
@@ -494,7 +498,9 @@ table{
 
     background:var(--primary-color);
 
-    color:white;
+    /* color:white; */
+    background: var(--surface-color);
+    color: var(--text-dark);
 
 }
 
@@ -511,7 +517,8 @@ table{
 
     gap:12px;
 
-    background:white;
+    /* background:white; */
+    background: var(--surface-color);
 
     padding:8px 15px;
 
@@ -653,6 +660,798 @@ table{
 
 }
 
+/* ==========================================
+   ANALYTICS
+========================================== */
+
+/* Analytics Heading */
+
+.analytics h2{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:var(--text-dark);
+
+    margin-bottom:30px;
+
+}
+
+
+/* Charts Grid */
+
+.charts-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+
+    gap:25px;
+
+}
+
+
+/* Chart Card */
+
+.chart-card{
+
+    background:var(--surface-color);
+
+    border-radius:var(--radius-md);
+
+    box-shadow:var(--shadow);
+
+    padding:25px;
+
+    transition:var(--transition);
+
+}
+
+.chart-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+
+}
+
+
+/* Chart Title */
+
+.chart-card h3{
+
+    font-size:1.1rem;
+
+    font-weight:600;
+
+    color:var(--text-dark);
+
+    margin-bottom:20px;
+
+}
+
+
+/* Chart Canvas */
+
+.chart-card canvas{
+
+    width:100% !important;
+
+    height:300px !important;
+
+}
+
+
+/* ==========================================
+   THREAT MONITORING
+========================================== */
+
+/* Section Header */
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+    flex-wrap:wrap;
+
+}
+
+.section-header h2{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:var(--text-dark);
+
+}
+
+
+/* Table Controls */
+
+.table-controls{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.table-controls input,
+.table-controls select{
+
+    padding:12px 16px;
+
+    border:1px solid var(--border-color);
+
+    border-radius:var(--radius-md);
+
+    background:var(--surface-color);
+
+    font-size:.95rem;
+
+    transition:var(--transition);
+
+}
+
+.table-controls input{
+
+    width:240px;
+
+}
+
+.table-controls input:focus,
+.table-controls select:focus{
+
+    border-color:var(--primary-color);
+
+}
+
+
+/* Threat Table */
+
+#threats table{
+
+    width:100%;
+
+    background:var(--surface-color);
+
+    border-radius:var(--radius-md);
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+/* Table Head */
+
+#threats thead{
+
+    background:var(--primary-color);
+
+    color:#fff;
+
+}
+
+#threats th{
+
+    padding:18px;
+
+    text-align:left;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+}
+
+
+/* Table Body */
+
+#threats td{
+
+    padding:18px;
+
+    border-bottom:1px solid var(--border-color);
+
+    color:var(--text-dark);
+
+}
+
+#threats tbody tr{
+
+    transition:var(--transition);
+
+}
+
+#threats tbody tr:hover{
+
+    background: var(--background-color);
+
+}
+
+#threats tbody tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+
+/* ==========================================
+   USER MANAGEMENT
+========================================== */
+
+/* User Table */
+
+#users table{
+
+    width:100%;
+
+    background:var(--surface-color);
+
+    border-radius:var(--radius-md);
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+/* Table Header */
+
+#users thead{
+
+    background:var(--primary-color);
+
+    color:#fff;
+
+}
+
+#users th{
+
+    padding:18px;
+
+    text-align:left;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+}
+
+
+/* Table Body */
+
+#users td{
+
+    padding:18px;
+
+    border-bottom:1px solid var(--border-color);
+
+    color:var(--text-dark);
+
+}
+
+#users tbody tr{
+
+    transition:var(--transition);
+
+}
+
+#users tbody tr:hover{
+
+    background: var(--background-color);
+
+}
+
+#users tbody tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+
+/* Action Buttons */
+
+#users td button{
+
+    padding:8px 14px;
+
+    margin-right:8px;
+
+    border-radius:var(--radius-sm);
+
+    font-size:.85rem;
+
+    font-weight:500;
+
+    color:#fff;
+
+}
+
+
+/* View Button */
+
+#users td button:nth-child(1){
+
+    background:var(--primary-color);
+
+}
+
+#users td button:nth-child(1):hover{
+
+    background:var(--primary-hover);
+
+}
+
+
+/* Edit Button */
+
+#users td button:nth-child(2){
+
+    background:var(--warning-color);
+
+}
+
+#users td button:nth-child(2):hover{
+
+    filter:brightness(.9);
+
+}
+
+
+/* Delete Button */
+
+#users td button:nth-child(3){
+
+    background:var(--danger-color);
+
+}
+
+#users td button:nth-child(3):hover{
+
+    filter:brightness(.9);
+
+}
+
+
+/* ==========================================
+   REPORTS
+========================================== */
+
+/* Report Buttons */
+
+.report-buttons{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+    margin-top:30px;
+
+}
+
+.report-buttons button{
+
+    padding:14px 24px;
+
+    background:var(--primary-color);
+
+    color:#fff;
+
+    border-radius:var(--radius-md);
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    box-shadow:var(--shadow);
+
+    transition:var(--transition);
+
+}
+
+.report-buttons button:hover{
+
+    background:var(--primary-hover);
+
+    transform:translateY(-3px);
+
+}
+
+
+/* ==========================================
+   SETTINGS
+========================================== */
+
+.settings-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    margin-top:30px;
+
+    background:var(--surface-color);
+
+    padding:25px;
+
+    border-radius:var(--radius-md);
+
+    box-shadow:var(--shadow);
+
+}
+
+.settings-list label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    font-size:1rem;
+
+    color:var(--text-dark);
+
+}
+
+.settings-list input[type="checkbox"]{
+
+    width:18px;
+
+    height:18px;
+
+    accent-color:var(--primary-color);
+
+}
+
+
+/* ==========================================
+   PROFILE
+========================================== */
+
+/* Profile Form */
+
+.profile-form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+    max-width:700px;
+
+    margin-top:30px;
+
+    background:var(--surface-color);
+
+    padding:30px;
+
+    border-radius:var(--radius-md);
+
+    box-shadow:var(--shadow);
+
+}
+
+
+/* Form Inputs */
+
+.profile-form input{
+
+    width:100%;
+
+    padding:14px 18px;
+
+    border:1px solid var(--border-color);
+
+    border-radius:var(--radius-md);
+
+    /* background:#fff; */
+    background: var(--surface-color);
+    color: var(--text-dark);
+
+    font-size:.95rem;
+
+    transition:var(--transition);
+
+}
+
+.profile-form input:focus{
+
+    border-color:var(--primary-color);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+
+}
+
+
+/* Save Button */
+
+.profile-form button{
+
+    align-self:flex-start;
+
+    padding:14px 28px;
+
+    background:var(--primary-color);
+
+    /* color:#fff; */
+    background: var(--surface-color);
+    color: var(--text-dark);
+
+    border-radius:var(--radius-md);
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    box-shadow:var(--shadow);
+
+    transition:var(--transition);
+
+}
+
+.profile-form button:hover{
+
+    background:var(--primary-hover);
+
+    transform:translateY(-3px);
+
+}
+
+
+/* ==========================================
+   REUSABLE UI COMPONENTS
+========================================== */
+
+/* ==========================================
+   STATUS BADGES
+========================================== */
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:.8rem;
+
+    font-weight:600;
+
+}
+
+.status.active{
+
+    background:rgba(22,163,74,.12);
+
+    color:var(--success-color);
+
+}
+
+.status.inactive{
+
+    background:rgba(220,38,38,.12);
+
+    color:var(--danger-color);
+
+}
+
+.status.pending{
+
+    background:rgba(245,158,11,.12);
+
+    color:var(--warning-color);
+
+}
+
+.status.blocked{
+
+    background:rgba(220,38,38,.12);
+
+    color:var(--danger-color);
+
+}
+
+.status.resolved{
+
+    background:rgba(22,163,74,.12);
+
+    color:var(--success-color);
+
+}
+
+.status.monitoring{
+
+    background:rgba(37,99,235,.12);
+
+    color:var(--primary-color);
+
+}
+
+
+/* ==========================================
+   BUTTON VARIANTS
+========================================== */
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:12px 20px;
+
+    border-radius:var(--radius-md);
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.btn-primary{
+
+    background:var(--primary-color);
+
+    color:#fff;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-hover);
+
+}
+
+.btn-success{
+
+    background:var(--success-color);
+
+    color:#fff;
+
+}
+
+.btn-warning{
+
+    background:var(--warning-color);
+
+    color:#fff;
+
+}
+
+.btn-danger{
+
+    background:var(--danger-color);
+
+    color:#fff;
+
+}
+
+
+/* ==========================================
+   SECTION CARD
+========================================== */
+
+.section-card{
+
+    background:var(--surface-color);
+
+    border-radius:var(--radius-md);
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.empty-state{
+
+    text-align:center;
+
+    padding:60px 20px;
+
+    color:var(--text-light);
+
+}
+
+.empty-state i{
+
+    font-size:3rem;
+
+    color:var(--primary-color);
+
+    margin-bottom:20px;
+
+}
+
+.empty-state h3{
+
+    margin-bottom:10px;
+
+}
+
+
+/* ==========================================
+   UTILITIES
+========================================== */
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.mt-20{
+
+    margin-top:20px;
+
+}
+
+.mb-20{
+
+    margin-bottom:20px;
+
+}
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.w-100{
+
+    width:100%;
+
+}
+
 
 /* ==========================================
    CARD
@@ -791,34 +1590,6 @@ table{
 
 }
 
-/* .card-info h2{
-
-    font-size:1.8rem;
-
-    font-weight:700;
-
-    color:var(--text-dark);
-
-    word-break:break-word;
-
-} */
-
-/* .card-info h2{
-
-    font-size:2rem;
-
-    font-weight:700;
-
-    color:var(--text-dark);
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-} */
-
 .card-info h2{
 
     font-size:2rem;
@@ -884,5 +1655,390 @@ table{
 .loading-screen{
 
     display:none;
+
+}
+
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+/* ==========================================
+   TABLETS (≤ 992px)
+========================================== */
+
+@media (max-width:992px){
+
+    .sidebar{
+
+        width:220px;
+
+    }
+
+    .main-content{
+
+        margin-left:220px;
+
+        width:calc(100% - 220px);
+
+        padding:25px;
+
+    }
+
+    .cards-container{
+
+        grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    }
+
+    .charts-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .header{
+
+        flex-wrap:wrap;
+
+    }
+
+    .search-box{
+
+        width:100%;
+
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE (≤ 768px)
+========================================== */
+
+@media (max-width:768px){
+
+    body{
+
+        display:block;
+
+    }
+
+    .sidebar{
+
+        position:relative;
+
+        width:100%;
+
+        min-height:auto;
+
+    }
+
+    .main-content{
+
+        width:100%;
+
+        margin-left:0;
+
+        padding:20px;
+
+    }
+
+    .header,
+    .page-title,
+    .section-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .header-right{
+
+        width:100%;
+
+        justify-content:space-between;
+
+    }
+
+    .cards-container{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .table-controls{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .table-controls input{
+
+        width:100%;
+
+    }
+
+    .report-buttons{
+
+        flex-direction:column;
+
+    }
+
+    .report-buttons button{
+
+        width:100%;
+
+    }
+
+    .profile-form{
+
+        padding:20px;
+
+    }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE (≤ 576px)
+========================================== */
+
+@media (max-width:576px){
+
+    h1{
+
+        font-size:1.7rem;
+
+    }
+
+    h2{
+
+        font-size:1.3rem;
+
+    }
+
+    .card{
+
+        padding:20px;
+
+    }
+
+    .card-icon{
+
+        width:56px;
+
+        height:56px;
+
+        font-size:1.3rem;
+
+    }
+
+    .card-info h2{
+
+        font-size:1.6rem;
+
+    }
+
+    .chart-card{
+
+        padding:20px;
+
+    }
+
+    .current-date{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+}
+
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.dark-mode {
+
+    --background-color: #111827;
+
+    --surface-color: #1f2937;
+
+    --sidebar-color: #0f172a;
+
+    --text-dark: #f9fafb;
+
+    --text-light: #9ca3af;
+
+    --border-color: #374151;
+
+}
+
+/* ==========================================
+   CUSTOM MODAL
+========================================== */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(0,0,0,.55);
+
+    padding:20px;
+
+    z-index:9999;
+
+}
+
+.modal.show{
+
+    display:flex;
+
+}
+
+.modal-content{
+
+    width:100%;
+
+    max-width:500px;
+
+    background:var(--surface-color);
+
+    color:var(--text-dark);
+
+    border-radius:var(--radius-md);
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.modal-content h2{
+
+    margin-bottom:20px;
+
+}
+
+.modal-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+.modal-content input{
+
+    width:100%;
+
+    margin-bottom:15px;
+
+    padding:12px 15px;
+
+    border:1px solid var(--border-color);
+
+    border-radius:var(--radius-md);
+
+    background:var(--surface-color);
+
+    color:var(--text-dark);
+
+}
+
+
+/* ==========================================
+   TOAST NOTIFICATIONS
+========================================== */
+
+.toast{
+
+    position:fixed;
+
+    top:30px;
+
+    right:30px;
+
+    min-width:280px;
+
+    max-width:380px;
+
+    background:var(--surface-color);
+
+    color:var(--text-dark);
+
+    padding:16px 20px;
+
+    border-radius:var(--radius-md);
+
+    box-shadow:var(--shadow);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:translateX(120%);
+
+    transition:all .35s ease;
+
+    z-index:10000;
+
+}
+
+.toast.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateX(0);
+
+}
+
+.toast i{
+
+    font-size:1.2rem;
+
+}
+
+.toast.success i{
+
+    color:var(--success-color);
+
+}
+
+.toast.error i{
+
+    color:var(--danger-color);
+
+}
+
+.toast.info i{
+
+    color:var(--primary-color);
 
 }
