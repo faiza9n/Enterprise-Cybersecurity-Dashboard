@@ -7,6 +7,8 @@
    DOM ELEMENTS
 ========================================== */
 
+const sidebarLogoutBtn = document.getElementById("sidebarLogoutBtn");
+
 const navLinks = document.querySelectorAll(".sidebar nav a");
 
 const pageSections = document.querySelectorAll(".page-section");
@@ -28,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 ========================================== */
 
 function initializeApplication() {
+
   initializeNavigation();
 
   initializeDashboard();
@@ -47,6 +50,8 @@ function initializeApplication() {
   initializeProfileDropdown();
 
   initializeProfile();
+
+  initializeLogout();
 
   initializeLoadingScreen();
 }
@@ -147,3 +152,22 @@ function updateCurrentDate() {
 }
 
 
+function initializeLogout() {
+  if (!sidebarLogoutBtn) {
+    return;
+  }
+
+  sidebarLogoutBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    showConfirm(
+      "Logout",
+
+      "Are you sure you want to logout?",
+
+      () => {
+        showToast("Logged out successfully.");
+      },
+    );
+  });
+}
