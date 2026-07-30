@@ -62,31 +62,22 @@ function initializeDownloadCSV() {
   });
 }
 
-
 /* ==========================================
    HELPER FUNCTIONS
 ========================================== */
 
-function simulateDownload(
-    button,
-    loadingText,
-    successMessage
-) {
+function simulateDownload(button, loadingText, successMessage) {
+  const originalText = button.textContent;
 
-    const originalText = button.textContent;
+  button.disabled = true;
 
-    button.disabled = true;
+  button.textContent = loadingText;
 
-    button.textContent = loadingText;
+  setTimeout(() => {
+    button.disabled = false;
 
-    setTimeout(() => {
+    button.textContent = originalText;
 
-        button.disabled = false;
-
-        button.textContent = originalText;
-
-        showToast(successMessage);
-
-    }, 1500);
-
+    showToast(successMessage);
+  }, 1500);
 }

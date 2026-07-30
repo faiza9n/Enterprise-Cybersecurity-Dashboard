@@ -15,6 +15,11 @@ let toastTimer;
 ========================================== */
 
 function showToast(message, type = "success") {
+
+    if (typeof addNotification === "function") {
+      addNotification(message);
+    }
+    
   clearTimeout(toastTimer);
 
   toast.className = `toast ${type}`;
@@ -43,8 +48,6 @@ function showToast(message, type = "success") {
   }, 3000);
 }
 
-/* ==========================================
-   TEST
-========================================== */
 
-showToast("Toast notification is working!");
+
+// showToast("Toast notification is working!");

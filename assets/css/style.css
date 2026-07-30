@@ -1650,11 +1650,245 @@ table{
    HIDDEN COMPONENTS
 ========================================== */
 
-.notification-panel,
+/* .notification-panel, */
 .modal,
 .loading-screen{
 
     display:none;
+
+}
+
+/* ==========================================
+   NOTIFICATION PANEL
+========================================== */
+
+.notification-panel{
+
+    position:absolute;
+    /* position:fixed; */
+
+    top:85px;
+
+    right:30px;
+
+    width:360px;
+
+    max-height:450px;
+
+    background:var(--surface-color);
+
+    color:var(--text-dark);
+
+    border-radius:var(--radius-md);
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+
+    display:none;
+
+    flex-direction:column;
+
+    z-index:9998;
+
+}
+
+.notification-panel.show{
+
+    display:flex;
+
+}
+
+.notification-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 20px;
+
+    border-bottom:1px solid var(--border-color);
+
+}
+
+.notification-header h3{
+
+    margin:0;
+
+}
+
+.notification-header button{
+
+    background:none;
+
+    border:none;
+
+    color:var(--primary-color);
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.notification-list{
+
+    max-height:320px;
+
+    overflow-y:auto;
+
+}
+
+.notification-item{
+
+    padding:16px 20px;
+
+    border-bottom:1px solid var(--border-color);
+
+    transition:var(--transition);
+
+}
+
+.notification-item:hover{
+
+    background:var(--background-color);
+
+}
+
+.notification-item h4{
+
+    margin-bottom:6px;
+
+    font-size:.95rem;
+
+}
+
+.notification-item p{
+
+    margin:0;
+
+    font-size:.8rem;
+
+    color:var(--text-light);
+
+}
+
+.notification-badge{
+
+    position:absolute;
+    /* position:fixed; */
+
+    top:-4px;
+
+    right:-4px;
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    background:var(--danger-color);
+
+    color:#fff;
+
+    font-size:.7rem;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:600;
+
+}
+
+.icon-btn{
+
+    position:relative;
+
+}
+
+/* ==========================================
+   PROFILE DROPDOWN
+========================================== */
+
+.profile-menu-container{
+
+    position:relative;
+
+}
+
+.profile{
+
+    cursor:pointer;
+
+}
+
+.profile-dropdown{
+
+    position:absolute;
+
+    top:70px;
+
+    right:0;
+
+    width:240px;
+
+    background:var(--surface-color);
+
+    border-radius:var(--radius-md);
+
+    box-shadow:var(--shadow);
+
+    display:none;
+
+    overflow:hidden;
+
+    z-index:9999;
+
+}
+
+.profile-dropdown.show{
+
+    display:block;
+
+}
+
+.profile-dropdown button{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:15px 20px;
+
+    background:none;
+
+    color:var(--text-dark);
+
+    font-size:.95rem;
+
+}
+
+.profile-dropdown button:hover{
+
+    background:var(--background-color);
+
+}
+
+.profile-dropdown hr{
+
+    border:none;
+
+    border-top:1px solid var(--border-color);
 
 }
 

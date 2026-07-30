@@ -40,7 +40,11 @@ function initializeApplication() {
 
   initializeReports();
 
+  initializeNotificationPanel();
+
   initializeSettings();
+
+  initializeProfileDropdown();
 
   initializeProfile();
 

@@ -187,9 +187,25 @@
 
             <div class="header-right">
 
-                <button class="icon-btn">
+                <!-- <button class="icon-btn">
 
                  <i class="fa-regular fa-bell"></i>
+
+                </button> -->
+
+                <button
+                    id="notificationBtn"
+                    class="icon-btn">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span
+                        id="notificationBadge"
+                        class="notification-badge">
+
+                        0
+
+                    </span>
 
                 </button>
 
@@ -201,7 +217,7 @@
 
                 </button>
 
-                <div class="profile">
+                <!-- <div class="profile">
 
                     <img src="assets/images/Mclovin.webp"
                         alt="Profile">
@@ -211,6 +227,64 @@
                         <h4>Faizan</h4>
 
                         <p>Security Analyst</p>
+
+                    </div>
+
+                </div> -->
+
+                <div id="profileMenuContainer" class="profile-menu-container">
+
+                    <div id="profileBtn" class="profile">
+
+                        <img src="assets/images/Mclovin.webp" alt="Profile">
+
+                        <div class="profile-info">
+
+                            <h4>Faizan</h4>
+
+                            <p>Security Analyst</p>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </div>
+
+                    <div id="profileDropdown" class="profile-dropdown">
+
+                        <button id="profilePageBtn">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            My Profile
+
+                        </button>
+
+                        <button id="settingsPageBtn">
+
+                            <i class="fa-solid fa-gear"></i>
+
+                            Settings
+
+                        </button>
+
+                        <button id="darkModeBtn">
+
+                            <i class="fa-solid fa-moon"></i>
+
+                            Toggle Dark Mode
+
+                        </button>
+
+                        <hr>
+
+                        <button id="logoutBtn">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            Logout
+
+                        </button>
 
                     </div>
 
@@ -838,21 +912,43 @@
             NOTIFICATION PANEL
     ======================== -->
 
-    <div class="notification-panel">
+    <!-- =======================
+        NOTIFICATION PANEL
+======================== -->
 
-        <h3>Notifications</h3>
+    <div id="notificationPanel" class="notification-panel">
 
-        <ul>
+        <div class="notification-header">
 
-            <li>High Risk Login</li>
+            <h3>Notifications</h3>
 
-            <li>Firewall Updated</li>
+            <button
+            id="clearNotificationsBtn"
+            type="button">
 
-            <li>New Device Connected</li>
+            Clear All
 
-            <li>Password Expiring</li>
+            </button>
 
-        </ul>
+        </div>
+
+        <div
+        id="notificationList"
+        class="notification-list">
+
+        </div>
+
+        <div
+            id="notificationEmptyState"
+            class="empty-state">
+
+            <i class="fa-regular fa-bell-slash"></i>
+
+            <h3>No Notifications</h3>
+
+            <p>You're all caught up.</p>
+
+        </div>
 
     </div>
 
@@ -956,6 +1052,8 @@
 
     <script src="assets/js/modal.js"></script>
 
+    <script src="assets/js/notifications.js"></script>
+
     <script src="assets/js/toast.js"></script>
 
     <script src="assets/js/users.js"></script>
@@ -963,6 +1061,8 @@
     <script src="assets/js/reports.js"></script>
 
     <script src="assets/js/settings.js"></script>
+
+    <script src="assets/js/profileDropdown.js"></script>
 
     <script src="assets/js/profile.js"></script>
 
