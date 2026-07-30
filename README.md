@@ -2,6 +2,8 @@
 
 A modern, responsive Enterprise Cybersecurity Dashboard built using HTML, CSS, and JavaScript.
 
+https://faiza9n.github.io/Enterprise-Cybersecurity-Dashboard/
+
 ## Features
 
 - Responsive Dashboard
