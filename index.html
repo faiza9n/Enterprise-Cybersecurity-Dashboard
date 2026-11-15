@@ -1,1075 +1,579 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Enterprise Cybersecurity Dashboard</title>
 
     <!-- Google Font -->
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Font Awesome -->
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
-    <!-- CSS -->
+    <!-- Css -->
 
-    <link rel="stylesheet"
-          href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+  </head>
 
-    <link rel="stylesheet"
-          href="assets/css/responsive.css">
-
-    <link rel="stylesheet"
-          href="assets/css/animations.css">
-
-</head>
-
-<body>
-
-    <!-- =======================
-            SIDEBAR
-    ======================== -->
+  <body>
+    <!-- Sidebar -->
 
     <aside class="sidebar">
+      <div class="logo">
+        <i class="fa-solid fa-shield-halved"></i>
 
-        <div class="logo">
-
-            <i class="fa-solid fa-shield-halved"></i>
-
-            <div>
-
-                <h2>Enterprise</h2>
-                <p>Cybersecurity</p>
-
-            </div>
-
+        <div>
+          <h2>Enterprise</h2>
+          <p>Cybersecurity</p>
         </div>
+      </div>
 
-        <nav>
+      <nav>
+        <ul>
+          <li>
+            <a href="#dashboard" class="active">
+              <i class="fa-solid fa-table-columns"></i>
 
-            <ul>
+              Dashboard
+            </a>
+          </li>
 
-                <li>
+          <li>
+            <a href="#threats">
+              <i class="fa-solid fa-triangle-exclamation"></i>
 
-                    <a href="#dashboard" class="active">
+              Threat Monitoring
+            </a>
+          </li>
 
-                        <i class="fa-solid fa-table-columns"></i>
+          <li>
+            <a href="#users">
+              <i class="fa-solid fa-users"></i>
 
-                        Dashboard
+              User Management
+            </a>
+          </li>
 
-                    </a>
+          <li>
+            <a href="#analytics">
+              <i class="fa-solid fa-chart-line"></i>
 
-                </li>
+              Analytics
+            </a>
+          </li>
 
-                <li>
+          <li>
+            <a href="#reports">
+              <i class="fa-solid fa-file-lines"></i>
 
-                    <a href="#threats">
+              Reports
+            </a>
+          </li>
 
-                        <i class="fa-solid fa-triangle-exclamation"></i>
+          <li>
+            <a href="#settings">
+              <i class="fa-solid fa-gear"></i>
 
-                        Threat Monitoring
+              Settings
+            </a>
+          </li>
 
-                    </a>
+          <li>
+            <a href="#profile">
+              <i class="fa-solid fa-user"></i>
 
-                </li>
+              Profile
+            </a>
+          </li>
 
-                <li>
+          <li>
+            <a href="#" id="sidebarLogoutBtn">
+              <i class="fa-solid fa-right-from-bracket"></i>
 
-                    <a href="#users">
-
-                        <i class="fa-solid fa-users"></i>
-
-                        User Management
-
-                    </a>
-
-                </li>
-
-                <li>
-
-                    <a href="#analytics">
-
-                        <i class="fa-solid fa-chart-line"></i>
-
-                        Analytics
-
-                    </a>
-
-                </li>
-
-                <li>
-
-                    <a href="#reports">
-
-                        <i class="fa-solid fa-file-lines"></i>
-
-                        Reports
-
-                    </a>
-
-                </li>
-
-                <li>
-
-                    <a href="#settings">
-
-                        <i class="fa-solid fa-gear"></i>
-
-                        Settings
-
-                    </a>
-
-                </li>
-
-                <li>
-
-                    <a href="#profile">
-
-                        <i class="fa-solid fa-user"></i>
-
-                        Profile
-
-                    </a>
-
-                </li>
-
-                <li>
-
-                    <!-- <a href="#"> -->
-                        <a
-                            href="#"
-                            id="sidebarLogoutBtn">
-
-                        <i class="fa-solid fa-right-from-bracket"></i>
-
-                        Logout
-
-                    </a>
-
-                </li>
-
-            </ul>
-
-        </nav>
-
+              Logout
+            </a>
+          </li>
+        </ul>
+      </nav>
     </aside>
 
-    <!-- =======================
-            MAIN
-    ======================== -->
+    <!-- Dark layer behind the slide menu (phones and tablets) -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Main -->
 
     <main class="main-content">
+      <!-- Header -->
 
-        <!-- Header -->
+      <header class="header">
+        <button id="menuBtn" class="icon-btn menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
 
-        <header class="header">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
 
-            <div class="search-box">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input type="text"
-                       placeholder="Search threats, users, reports...">
-
-            </div>
-
-            <div class="header-right">
-
-                <!-- <button class="icon-btn">
-
-                 <i class="fa-regular fa-bell"></i>
-
-                </button> -->
-
-                <button
-                    id="notificationBtn"
-                    class="icon-btn">
-
-                    <i class="fa-regular fa-bell"></i>
-
-                    <span
-                        id="notificationBadge"
-                        class="notification-badge">
-
-                        0
-
-                    </span>
-
-                </button>
-
-                <button
-                    id="themeToggleBtn"
-                    class="icon-btn">
-
-                    <i class="fa-solid fa-moon"></i>
-
-                </button>
-
-                <!-- <div class="profile">
-
-                    <img src="assets/images/Mclovin.webp"
-                        alt="Profile">
-
-                    <div class="profile-info">
-
-                        <h4>Faizan</h4>
-
-                        <p>Security Analyst</p>
-
-                    </div>
-
-                </div> -->
-
-                <div id="profileMenuContainer" class="profile-menu-container">
-
-                    <div id="profileBtn" class="profile">
-
-                        <img src="assets/images/Mclovin.webp" alt="Profile">
-
-                        <div class="profile-info">
-
-                            <h4>Faizan</h4>
-
-                            <p>Security Analyst</p>
-
-                        </div>
-
-                        <i class="fa-solid fa-chevron-down"></i>
-
-                    </div>
-
-                    <div id="profileDropdown" class="profile-dropdown">
-
-                        <button id="profilePageBtn">
-
-                            <i class="fa-solid fa-user"></i>
-
-                            My Profile
-
-                        </button>
-
-                        <button id="settingsPageBtn">
-
-                            <i class="fa-solid fa-gear"></i>
-
-                            Settings
-
-                        </button>
-
-                        <button id="darkModeBtn">
-
-                            <i class="fa-solid fa-moon"></i>
-
-                            Toggle Dark Mode
-
-                        </button>
-
-                        <hr>
-
-                        <button id="logoutBtn">
-
-                            <i class="fa-solid fa-right-from-bracket"></i>
-
-                            Logout
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </header>
-
-
-        <!-- =======================
-                DASHBOARD
-         ======================== -->
-
-        <!-- <section id="dashboard" class="dashboard"> -->
-        <section id="dashboard" class="dashboard page-section active-page">
-
-            <div class="page-title">
-
-                <div>
-
-                    <h1>Enterprise Cybersecurity Dashboard</h1>
-
-                    <p>
-                        Welcome back, Faizan.
-                        Here's your organization's current security status.
-                    </p>
-
-                </div>
-
-                <div class="current-date">
-
-                    <span>Tuesday, 28 July 2026</span>
-
-                </div>
-
-            </div>
-
-            <!-- Statistics Cards -->
-
-            <div class="cards-container">
-
-                <!-- Card 1 -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-shield-halved"></i>
-
-                    </div>
-
-                    <div class="card-info">
-
-                        <h3>Security Score</h3>
-
-                        <h2 id="security-score">92%</h2>
-
-                    </div>
-
-                </div>
-
-                <!-- Card 2 -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-bug"></i>
-
-                    </div>
-
-                    <div class="card-info">
-
-                        <h3>Threats Found</h3>
-
-                        <h2 id="threat-count">18</h2>
-
-                    </div>
-
-                </div>
-
-                <!-- Card 3 -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-users"></i>
-
-                    </div>
-
-                    <div class="card-info">
-
-                        <h3>Active Users</h3>
-
-                        <h2 id="active-users">156</h2>
-
-                    </div>
-
-                </div>
-
-                <!-- Card 4 -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-
-                    </div>
-
-                    <div class="card-info">
-
-                        <h3>Critical Alerts</h3>
-
-                        <h2 id="critical-alerts">3</h2>
-
-                    </div>
-
-                </div>
-
-                <!-- Card 5 -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-server"></i>
-
-                    </div>
-
-                    <div class="card-info">
-
-                        <h3>Servers Online</h3>
-
-                        <!-- <h2 id="servers-online">48</h2> -->
-                        <h2 id="servers-online">48 / 50</h2>
-
-                    </div>
-
-                </div>
-
-                <!-- Card 6 -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-right-to-bracket"></i>
-
-                    </div>
-
-                    <div class="card-info">
-
-                        <h3>Login Attempts</h3>
-
-                        <h2 id="login-attempts">1,240</h2>
-
-                    </div>
-
-                </div>
-
-                <!-- Card 7 -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-network-wired"></i>
-
-                    </div>
-
-                    <div class="card-info">
-
-                        <h3>Network Health</h3>
-
-                        <h2 id="network-health">Healthy</h2>
-
-                    </div>
-
-                </div>
-
-                <!-- Card 8 -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-fire"></i>
-
-                    </div>
-
-                    <div class="card-info">
-
-                        <h3>Firewall Status</h3>
-
-                        <h2 id="firewall-status">Active</h2>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-                <!-- =======================
-                ANALYTICS
-        ======================== -->
-
-        <section id="analytics" class="analytics page-section">
-
-            <h2>Security Analytics</h2>
-
-            <div class="charts-grid">
-
-                <div class="chart-card">
-
-                    <h3>Threat Trend</h3>
-
-                    <canvas id="threatTrendChart"></canvas>
-
-                </div>
-
-                <div class="chart-card">
-
-                    <h3>Threat Categories</h3>
-
-                    <canvas id="threatCategoryChart"></canvas>
-
-                </div>
-
-                <div class="chart-card">
-
-                    <h3>Login Activity</h3>
-
-                    <canvas id="loginChart"></canvas>
-
-                </div>
-
-                <div class="chart-card">
-
-                    <h3>Monthly Incidents</h3>
-
-                    <canvas id="incidentChart"></canvas>
-
-                </div>
-
-                <div class="chart-card">
-
-                    <h3>Device Distribution</h3>
-
-                    <canvas id="deviceChart"></canvas>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =======================
-        THREAT MONITORING
-======================== -->
-
-<section id="threats" class="content-section page-section">
-
-    <div class="section-header">
-
-        <h2>Threat Monitoring</h2>
-
-        <div class="table-controls">
-
-            <input
-                id="threatSearch"
-                type="text"
-                placeholder="Search Threat...">
-
-            <select id="severityFilter">
-
-                <option>All Severity</option>
-                <option>Critical</option>
-                <option>High</option>
-                <option>Medium</option>
-                <option>Low</option>
-
-            </select>
-
+          <input type="text" placeholder="Search threats, users, reports..." />
         </div>
 
-    </div>
+        <div class="header-right">
+          <button id="notificationBtn" class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
 
-    <table>
+            <span id="notificationBadge" class="notification-badge"> 0 </span>
+          </button>
 
-        <thead>
+          <button id="themeToggleBtn" class="icon-btn">
+            <i class="fa-solid fa-moon"></i>
+          </button>
 
-            <tr>
+          <div id="profileMenuContainer" class="profile-menu-container">
+            <div id="profileBtn" class="profile">
+              <img src="assets/images/Mclovin.webp" alt="Profile" />
 
+              <div class="profile-info">
+                <h4>Faizan</h4>
+
+                <p>Security Analyst</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+
+            <div id="profileDropdown" class="profile-dropdown">
+              <button id="profilePageBtn">
+                <i class="fa-solid fa-user"></i>
+
+                My Profile
+              </button>
+
+              <button id="settingsPageBtn">
+                <i class="fa-solid fa-gear"></i>
+
+                Settings
+              </button>
+
+              <button id="darkModeBtn">
+                <i class="fa-solid fa-moon"></i>
+
+                Toggle Dark Mode
+              </button>
+
+              <hr />
+
+              <button id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard -->
+
+      <section id="dashboard" class="dashboard page-section active-page">
+        <div class="page-title">
+          <div>
+            <h1>Enterprise Cybersecurity Dashboard</h1>
+
+            <p>Welcome back, Faizan. Here's your organization's current security status.</p>
+          </div>
+
+          <div class="current-date">
+            <span>Tuesday, 28 July 2026</span>
+          </div>
+        </div>
+
+        <!-- Statistics Cards -->
+
+        <div class="cards-container">
+          <!-- Card 1 -->
+
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div class="card-info">
+              <h3>Security Score</h3>
+
+              <h2 id="security-score">92%</h2>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-bug"></i>
+            </div>
+
+            <div class="card-info">
+              <h3>Threats Found</h3>
+
+              <h2 id="threat-count">18</h2>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div class="card-info">
+              <h3>Active Users</h3>
+
+              <h2 id="active-users">156</h2>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <div class="card-info">
+              <h3>Critical Alerts</h3>
+
+              <h2 id="critical-alerts">3</h2>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-server"></i>
+            </div>
+
+            <div class="card-info">
+              <h3>Servers Online</h3>
+
+              <h2 id="servers-online">48 / 50</h2>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-right-to-bracket"></i>
+            </div>
+
+            <div class="card-info">
+              <h3>Login Attempts</h3>
+
+              <h2 id="login-attempts">1,240</h2>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+
+            <div class="card-info">
+              <h3>Network Health</h3>
+
+              <h2 id="network-health">Healthy</h2>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-fire"></i>
+            </div>
+
+            <div class="card-info">
+              <h3>Firewall Status</h3>
+
+              <h2 id="firewall-status">Active</h2>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analytics -->
+
+      <section id="analytics" class="analytics page-section">
+        <h2>Security Analytics</h2>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <h3>Threat Trend</h3>
+
+            <canvas id="threatTrendChart"></canvas>
+          </div>
+
+          <div class="chart-card">
+            <h3>Threat Categories</h3>
+
+            <canvas id="threatCategoryChart"></canvas>
+          </div>
+
+          <div class="chart-card">
+            <h3>Login Activity</h3>
+
+            <canvas id="loginChart"></canvas>
+          </div>
+
+          <div class="chart-card">
+            <h3>Monthly Incidents</h3>
+
+            <canvas id="incidentChart"></canvas>
+          </div>
+
+          <div class="chart-card">
+            <h3>Device Distribution</h3>
+
+            <canvas id="deviceChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Threat Monitoring -->
+
+      <section id="threats" class="content-section page-section">
+        <div class="section-header">
+          <h2>Threat Monitoring</h2>
+
+          <div class="table-controls">
+            <input id="threatSearch" type="text" placeholder="Search Threat..." />
+
+            <select id="severityFilter">
+              <option>All Severity</option>
+              <option>Critical</option>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
                 <th>ID</th>
                 <th>Threat</th>
                 <th>Severity</th>
                 <th>Status</th>
                 <th>Source</th>
                 <th>Time</th>
+              </tr>
+            </thead>
 
-            </tr>
+            <tbody id="threatsTableBody"></tbody>
+          </table>
+        </div>
 
-        </thead>
+        <div id="noThreatsFound" class="empty-state hidden">
+          <i class="fa-solid fa-circle-exclamation"></i>
 
-        <tbody>
+          <h3>No Threats Found</h3>
 
-            <tr>
+          <p>Try adjusting your search or filter.</p>
+        </div>
+      </section>
 
-                <td>TH001</td>
+      <!-- User Management -->
 
-                <td>Malware</td>
+      <section id="users" class="content-section page-section">
+        <div class="section-header">
+          <h2>User Management</h2>
 
-                <td>Critical</td>
+          <button type="button" id="addUserBtn" class="btn">
+            <i class="fa-solid fa-plus"></i>
 
-                <td>
-                    <span class="status blocked">
-                        Blocked
-                    </span>
-                </td>
+            Add User
+          </button>
+        </div>
 
-                <td>192.168.1.20</td>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Last Login</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-                <td>09:15</td>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
 
-            </tr>
+        <div id="noUsersFound" class="empty-state hidden">
+          <i class="fa-solid fa-users-slash"></i>
 
-            <tr>
+          <h3>No Users Found</h3>
 
-                <td>TH002</td>
+          <p>Add a new user to get started.</p>
+        </div>
+      </section>
 
-                <td>Phishing</td>
+      <!-- Reports -->
 
-                <td>High</td>
+      <section id="reports" class="content-section page-section">
+        <h2>Reports</h2>
 
-                <td>
-                    <span class="status monitoring">
-                        Investigating
-                    </span>
-                </td>
+        <div class="report-buttons">
+          <button id="downloadPdfBtn">Download PDF</button>
 
-                <td>Email Gateway</td>
+          <button id="downloadExcelBtn">Download Excel</button>
 
-                <td>10:42</td>
+          <button id="downloadCsvBtn">Download CSV</button>
+        </div>
+      </section>
 
-            </tr>
+      <!-- Settings -->
 
-            <tr>
+      <section id="settings" class="content-section page-section">
+        <h2>Settings</h2>
 
-                <td>TH003</td>
+        <div class="settings-list">
+          <label>
+            <input type="checkbox" id="notificationsToggle" />
 
-                <td>DDoS</td>
+            Enable Notifications
+          </label>
 
-                <td>Medium</td>
+          <label>
+            <input type="checkbox" id="autoLogoutToggle" />
 
-                <td>
-                    <span class="status resolved">
-                        Resolved
-                    </span>
-                </td>
+            Auto Logout
+          </label>
 
-                <td>Firewall</td>
+          <label>
+            <input type="checkbox" id="twoFactorToggle" />
 
-                <td>12:25</td>
+            Two-Factor Authentication
+          </label>
 
-            </tr>
+          <label>
+            <input type="checkbox" id="darkModeToggle" />
 
-        </tbody>
+            Dark Mode
+          </label>
+        </div>
+      </section>
 
-    </table>
+      <!-- Profile -->
 
-    <div
-        id="noThreatsFound"
-        class="empty-state hidden">
+      <section id="profile" class="content-section page-section">
+        <h2>Profile</h2>
 
-        <i class="fa-solid fa-circle-exclamation"></i>
+        <form class="profile-form">
+          <input type="text" id="profileName" placeholder="Full Name" />
 
-        <h3>No Threats Found</h3>
+          <input type="email" id="profileEmail" placeholder="Email" />
 
-        <p>Try adjusting your search or filter.</p>
+          <input type="text" id="profilePhone" placeholder="Phone Number" />
 
-    </div>
+          <input type="text" id="profileDepartment" placeholder="Department" />
 
-</section>
+          <input type="text" id="profileDesignation" placeholder="Designation" />
 
+          <button type="submit">Save Profile</button>
+        </form>
+      </section>
 
-        <!-- =======================
-                USER MANAGEMENT
-        ======================== -->
+      <!-- Footer -->
 
-        <section id="users" class="content-section page-section">
-
-            <!-- <div class="section-header">
-
-                <h2>User Management</h2>
-
-            </div> -->
-
-            <div class="section-header">
-
-    <h2>User Management</h2>
-
-    <!-- <button id="addUserBtn" class="btn"> -->
-    <button
-    type="button"
-    id="addUserBtn"
-    class="btn">
-
-        <i class="fa-solid fa-plus"></i>
-
-        Add User
-
-    </button>
-
-</div>
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>Name</th>
-                        <th>Department</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Last Login</th>
-                        <th>Action</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="usersTableBody">
-
-                    <tr>
-
-                        <td>Faizan Khan</td>
-                        <td>Security</td>
-                        <td>Administrator</td>
-                        <!-- <td>Active</td> -->
-
-                        <td> 
-                        <span class="status active">
-
-                            Active
-
-                        </span>
-                        </td>
-
-                        <td>Today</td>
-
-                        <td>
-                            <button type="button" class="btn view-btn">
-
-                                View
-
-                            </button>
-
-                            <button type="button" class="btn edit-btn">
-
-                                Edit
-
-                            </button>
-
-                            <button type="button" class="btn delete-btn">
-
-                                Delete
-
-                            </button>
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-            <div
-                id="noUsersFound"
-                class="empty-state hidden">
-
-                <i class="fa-solid fa-users-slash"></i>
-
-                <h3>No Users Found</h3>
-
-                <p>Add a new user to get started.</p>
-
-            </div>
-
-        </section>
-
-        <!-- =======================
-                REPORTS
-        ======================== -->
-
-        <section id="reports" class="content-section page-section">
-
-            <h2>Reports</h2>
-
-            <div class="report-buttons">
-
-                <button id="downloadPdfBtn">Download PDF</button>
-
-                <button id="downloadExcelBtn">Download Excel</button>
-
-                <button id="downloadCsvBtn">Download CSV</button>
-
-            </div>
-
-        </section>
-
-        <!-- =======================
-                SETTINGS
-        ======================== -->
-
-        <section id="settings" class="content-section page-section">
-
-            <h2>Settings</h2>
-
-            <div class="settings-list">
-
-                <label>
-
-                    <input type="checkbox"
-                    id="notificationsToggle">
-
-                    Enable Notifications
-
-                </label>
-
-                <label>
-
-                    <input type="checkbox"
-                    id="autoLogoutToggle">
-
-                    Auto Logout
-
-                </label>
-
-                <label>
-
-                    <input type="checkbox"
-                    id="twoFactorToggle">
-
-                    Two-Factor Authentication
-
-                </label>
-
-                <label>
-
-                    <input type="checkbox"
-                    id="darkModeToggle">
-
-                    Dark Mode
-
-                </label>
-
-            </div>
-
-        </section>
-
-        <!-- =======================
-                PROFILE
-        ======================== -->
-
-        <section id="profile" class="content-section page-section">
-
-            <h2>Profile</h2>
-
-            <form class="profile-form">
-
-                <input
-                    type="text"
-                    placeholder="Full Name">
-
-                <input
-                    type="email"
-                    placeholder="Email">
-
-                <input
-                    type="text"
-                    placeholder="Phone Number">
-
-                <input
-                    type="text"
-                    placeholder="Department">
-
-                <input
-                    type="text"
-                    placeholder="Designation">
-
-                <button type="submit">
-
-                    Save Profile
-
-                </button>
-
-            </form>
-
-        </section>
-
-                <!-- =======================
-                FOOTER
-        ======================== -->
-
-        <footer class="footer">
-
-            <p>
-
-                © 2026 Enterprise Cybersecurity Dashboard
-
-            </p>
-
-        </footer>
-
+      <footer class="footer">
+        <p>© 2026 Enterprise Cybersecurity Dashboard</p>
+      </footer>
     </main>
 
-    <!-- =======================
-            NOTIFICATION PANEL
-    ======================== -->
-
-    <!-- =======================
-        NOTIFICATION PANEL
-======================== -->
+    <!-- Notification Panel -->
 
     <div id="notificationPanel" class="notification-panel">
+      <div class="notification-header">
+        <h3>Notifications</h3>
 
-        <div class="notification-header">
+        <button id="clearNotificationsBtn" type="button">Clear All</button>
+      </div>
 
-            <h3>Notifications</h3>
+      <div id="notificationList" class="notification-list"></div>
 
-            <button
-            id="clearNotificationsBtn"
-            type="button">
+      <div id="notificationEmptyState" class="empty-state">
+        <i class="fa-regular fa-bell-slash"></i>
 
-            Clear All
+        <h3>No Notifications</h3>
 
-            </button>
-
-        </div>
-
-        <div
-        id="notificationList"
-        class="notification-list">
-
-        </div>
-
-        <div
-            id="notificationEmptyState"
-            class="empty-state">
-
-            <i class="fa-regular fa-bell-slash"></i>
-
-            <h3>No Notifications</h3>
-
-            <p>You're all caught up.</p>
-
-        </div>
-
+        <p>You're all caught up.</p>
+      </div>
     </div>
 
-    <!-- =======================
-            MODAL
-    ======================== -->
+    <!-- Modal -->
 
-    <!-- <div class="modal">
-
-        <div class="modal-content">
-
-            <h2>Modal Window</h2>
-
-            <p>
-
-                Modal Content
-
-            </p>
-
-            <button>
-
-                Close
-
-            </button>
-
-        </div>
-
-    </div> -->
-
-<div id="customModal" class="modal">
-
-    <div class="modal-content">
-
+    <div id="customModal" class="modal">
+      <div class="modal-content">
         <h2 id="modalTitle"></h2>
 
         <div id="modalBody"></div>
 
         <div class="modal-actions">
+          <button id="modalCancelBtn" type="button" class="btn btn-danger">Cancel</button>
 
-            <button
-                id="modalCancelBtn"
-                type="button"
-                class="btn btn-danger">
-
-                Cancel
-
-            </button>
-
-            <button
-                id="modalConfirmBtn"
-                type="button"
-                class="btn btn-primary">
-
-                Confirm
-
-            </button>
-
+          <button id="modalConfirmBtn" type="button" class="btn btn-primary">Confirm</button>
         </div>
-
+      </div>
     </div>
 
-</div>
-
-    <!-- =======================
-            LOADING SPINNER
-    ======================== -->
+    <!-- Loading Spinner -->
 
     <div class="loading-screen">
-
-        <div class="spinner"></div>
-
+      <div class="spinner"></div>
     </div>
 
     <!-- Chart.js -->
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    
     <!-- Toast -->
 
     <div id="toast" class="toast">
+      <i id="toastIcon" class="fa-solid fa-circle-check"></i>
 
-        <i id="toastIcon" class="fa-solid fa-circle-check"></i>
-
-        <span id="toastMessage"></span>
-
+      <span id="toastMessage"></span>
     </div>
 
-    
     <!-- JavaScript Files -->
 
-    <script src="assets/js/app.js"></script>
-
-    <script src="assets/js/dashboard.js"></script>
-
-    <script src="assets/js/charts.js"></script>
-
     <script src="assets/js/storage.js"></script>
-
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/charts.js"></script>
     <script src="assets/js/threats.js"></script>
-
-    <script src="assets/js/modal.js"></script>
-
-    <script src="assets/js/notifications.js"></script>
-
-    <script src="assets/js/toast.js"></script>
-
     <script src="assets/js/users.js"></script>
-
     <script src="assets/js/reports.js"></script>
-
     <script src="assets/js/settings.js"></script>
-
-    <script src="assets/js/profileDropdown.js"></script>
-
     <script src="assets/js/profile.js"></script>
-
-
-</body>
-
+    <script src="assets/js/app.js"></script>
+  </body>
 </html>

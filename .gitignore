@@ -1,3 +1,16 @@
+# Operating system files
 .DS_Store
 Thumbs.db
+
+# IDE settings
 .vscode/settings.json
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Environment variables and secrets
+.env
+.env.*

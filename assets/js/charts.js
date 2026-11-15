@@ -1,197 +1,70 @@
-/* ==========================================
-   CHART.JS INITIALIZATION
-========================================== */
+// charts.js
+// The five analytics charts. Each chart is described as data,
+// and one loop creates them all with Chart.js.
+
+const COLORS = {
+  blue: "#2563eb",
+  green: "#16a34a",
+  amber: "#f59e0b",
+  red: "#dc2626",
+  purple: "#8b5cf6",
+};
+
+const CHARTS = [
+  {
+    canvasId: "threatTrendChart",
+    type: "line",
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    dataset: {
+      label: "Threats",
+      data: [14, 18, 12, 20, 15, 10, 17],
+      borderColor: COLORS.blue,
+      backgroundColor: "rgba(37, 99, 235, 0.15)",
+      fill: true,
+      tension: 0.4,
+    },
+  },
+  {
+    canvasId: "threatCategoryChart",
+    type: "doughnut",
+    labels: ["Malware", "Phishing", "DDoS", "Ransomware"],
+    dataset: {
+      data: [35, 25, 20, 20],
+      backgroundColor: [COLORS.blue, COLORS.green, COLORS.amber, COLORS.red],
+    },
+  },
+  {
+    canvasId: "loginChart",
+    type: "bar",
+    labels: ["Morning", "Afternoon", "Evening", "Night"],
+    dataset: { label: "Logins", data: [220, 380, 270, 120], backgroundColor: COLORS.blue },
+  },
+  {
+    canvasId: "incidentChart",
+    type: "bar",
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    dataset: { label: "Incidents", data: [24, 19, 30, 18, 22, 15], backgroundColor: COLORS.red },
+  },
+  {
+    canvasId: "deviceChart",
+    type: "pie",
+    labels: ["Desktop", "Laptop", "Mobile", "Server"],
+    dataset: {
+      data: [28, 34, 22, 16],
+      backgroundColor: [COLORS.blue, COLORS.green, COLORS.amber, COLORS.purple],
+    },
+  },
+];
 
 function initializeCharts() {
-  createThreatTrendChart();
+  for (const chart of CHARTS) {
+    const canvas = document.getElementById(chart.canvasId);
+    if (!canvas) continue;
 
-  createThreatCategoryChart();
-
-  createLoginChart();
-
-  createIncidentChart();
-
-  createDeviceChart();
-}
-
-/* ==========================================
-   THREAT TREND CHART
-========================================== */
-
-function createThreatTrendChart() {
-  const canvas = document.getElementById("threatTrendChart");
-
-  if (!canvas) {
-    return;
+    new Chart(canvas, {
+      type: chart.type,
+      data: { labels: chart.labels, datasets: [chart.dataset] },
+      options: { responsive: true, maintainAspectRatio: false },
+    });
   }
-
-  new Chart(canvas, {
-    type: "line",
-
-    data: {
-      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-
-      datasets: [
-        {
-          label: "Threats",
-
-          data: [14, 18, 12, 20, 15, 10, 17],
-
-          borderColor: "#2563eb",
-
-          backgroundColor: "rgba(37, 99, 235, 0.15)",
-
-          fill: true,
-
-          tension: 0.4,
-        },
-      ],
-    },
-
-    options: {
-      responsive: true,
-
-      maintainAspectRatio: false,
-    },
-  });
-}
-
-/* ==========================================
-   THREAT CATEGORY CHART
-========================================== */
-
-function createThreatCategoryChart() {
-  const canvas = document.getElementById("threatCategoryChart");
-
-  if (!canvas) {
-    return;
-  }
-
-  new Chart(canvas, {
-    type: "doughnut",
-
-    data: {
-      labels: ["Malware", "Phishing", "DDoS", "Ransomware"],
-
-      datasets: [
-        {
-          data: [35, 25, 20, 20],
-
-          backgroundColor: ["#2563eb", "#16a34a", "#f59e0b", "#dc2626"],
-        },
-      ],
-    },
-
-    options: {
-      responsive: true,
-
-      maintainAspectRatio: false,
-    },
-  });
-}
-
-/* ==========================================
-   LOGIN ACTIVITY CHART
-========================================== */
-
-function createLoginChart() {
-  const canvas = document.getElementById("loginChart");
-
-  if (!canvas) {
-    return;
-  }
-
-  new Chart(canvas, {
-    type: "bar",
-
-    data: {
-      labels: ["Morning", "Afternoon", "Evening", "Night"],
-
-      datasets: [
-        {
-          label: "Logins",
-
-          data: [220, 380, 270, 120],
-
-          backgroundColor: "#2563eb",
-        },
-      ],
-    },
-
-    options: {
-      responsive: true,
-
-      maintainAspectRatio: false,
-    },
-  });
-}
-
-/* ==========================================
-   MONTHLY INCIDENTS CHART
-========================================== */
-
-function createIncidentChart() {
-  const canvas = document.getElementById("incidentChart");
-
-  if (!canvas) {
-    return;
-  }
-
-  new Chart(canvas, {
-    type: "bar",
-
-    data: {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-
-      datasets: [
-        {
-          label: "Incidents",
-
-          data: [24, 19, 30, 18, 22, 15],
-
-          backgroundColor: "#dc2626",
-        },
-      ],
-    },
-
-    options: {
-      responsive: true,
-
-      maintainAspectRatio: false,
-    },
-  });
-}
-
-/* ==========================================
-   DEVICE DISTRIBUTION CHART
-========================================== */
-
-function createDeviceChart() {
-  const canvas = document.getElementById("deviceChart");
-
-  if (!canvas) {
-    return;
-  }
-
-  new Chart(canvas, {
-    type: "pie",
-
-    data: {
-      labels: ["Desktop", "Laptop", "Mobile", "Server"],
-
-      datasets: [
-        {
-          data: [28, 34, 22, 16],
-
-          backgroundColor: ["#2563eb", "#16a34a", "#f59e0b", "#8b5cf6"],
-        },
-      ],
-    },
-
-    options: {
-      responsive: true,
-
-      maintainAspectRatio: false,
-    },
-  });
 }

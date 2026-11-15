@@ -1,105 +1,38 @@
-/* ==========================================
-   DOM ELEMENTS
-========================================== */
+// profile.js
+// The profile form: check the fields, save them, and fill them in again on the next visit.
 
-const profileForm = document.querySelector(".profile-form");
-
-const fullNameInput = profileForm.querySelector(
-  'input[placeholder="Full Name"]',
-);
-
-const emailInput = profileForm.querySelector('input[placeholder="Email"]');
-
-const phoneInput = profileForm.querySelector(
-  'input[placeholder="Phone Number"]',
-);
-
-const departmentInput = profileForm.querySelector(
-  'input[placeholder="Department"]',
-);
-
-const designationInput = profileForm.querySelector(
-  'input[placeholder="Designation"]',
-);
-
-initializeProfile();
+const PROFILE_FIELDS = {
+  fullName: "profileName",
+  email: "profileEmail",
+  phone: "profilePhone",
+  department: "profileDepartment",
+  designation: "profileDesignation",
+};
 
 function initializeProfile() {
-  loadProfile();
+  const saved = load(STORAGE_KEYS.profile, {});
 
-  profileForm.addEventListener("submit", saveProfile);
+  for (const [key, inputId] of Object.entries(PROFILE_FIELDS)) {
+    document.getElementById(inputId).value = saved[key] || "";
+  }
+
+  document.querySelector(".profile-form").addEventListener("submit", saveProfile);
 }
-
-/* ==========================================
-   SAVE PROFILE
-========================================== */
 
 function saveProfile(event) {
+  event.preventDefault(); // stop the browser from reloading the page
 
-    event.preventDefault();
+  const profile = {};
+  for (const [key, inputId] of Object.entries(PROFILE_FIELDS)) {
+    profile[key] = document.getElementById(inputId).value.trim();
+  }
 
-    const profileData = {
+  const hasEmptyField = Object.values(profile).some((value) => value === "");
+  if (hasEmptyField) {
+    showToast("Please fill in all fields.", "error");
+    return;
+  }
 
-        fullName: fullNameInput.value.trim(),
-
-        email: emailInput.value.trim(),
-
-        phone: phoneInput.value.trim(),
-
-        department: departmentInput.value.trim(),
-
-        designation: designationInput.value.trim()
-
-    };
-
-    if (
-        !profileData.fullName ||
-        !profileData.email ||
-        !profileData.phone ||
-        !profileData.department ||
-        !profileData.designation
-    ) {
-
-        // alert("Please fill in all fields.");
-        showToast("Please fill in all fields.", "error");
-
-        return;
-
-    }
-
-    localStorage.setItem(
-        "userProfile",
-        JSON.stringify(profileData)
-    );
-
-    // alert("Profile saved successfully.");
-    showToast("Profile saved successfully.");
-
+  save(STORAGE_KEYS.profile, profile);
+  showToast("Profile saved successfully.");
 }
-
-/* ==========================================
-   LOAD PROFILE
-========================================== */
-
-function loadProfile() {
-
-    const savedProfile = JSON.parse(
-        localStorage.getItem("userProfile")
-    );
-
-    if (!savedProfile) {
-        return;
-    }
-
-    fullNameInput.value = savedProfile.fullName;
-
-    emailInput.value = savedProfile.email;
-
-    phoneInput.value = savedProfile.phone;
-
-    departmentInput.value = savedProfile.department;
-
-    designationInput.value = savedProfile.designation;
-
-}
-
