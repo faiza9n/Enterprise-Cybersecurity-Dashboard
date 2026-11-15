@@ -1,82 +1,77 @@
-/* ==========================================
-   DOM ELEMENTS
-========================================== */
+// threats.js
+// The threat list is kept as data. The table is drawn from it,
+// and search and filter work on the data, not on the page.
 
-const threatSearchInput = document.getElementById("threatSearch");
-
-const severityFilter = document.getElementById("severityFilter");
-
-const threatRows = document.querySelectorAll("#threats tbody tr");
-
-const noThreatsFound = document.getElementById("noThreatsFound");
-
-/* ==========================================
-   THREAT MONITORING INITIALIZATION
-========================================== */
+const THREATS = [
+  {
+    id: "TH001",
+    type: "Malware",
+    severity: "Critical",
+    status: "Blocked",
+    statusClass: "blocked",
+    source: "192.168.1.20",
+    time: "09:15",
+  },
+  {
+    id: "TH002",
+    type: "Phishing",
+    severity: "High",
+    status: "Investigating",
+    statusClass: "monitoring",
+    source: "Email Gateway",
+    time: "10:42",
+  },
+  {
+    id: "TH003",
+    type: "DDoS",
+    severity: "Medium",
+    status: "Resolved",
+    statusClass: "resolved",
+    source: "Firewall",
+    time: "12:25",
+  },
+];
 
 function initializeThreats() {
-  initializeThreatSearch();
-
-  initializeThreatFilter();
+  document.getElementById("threatSearch").addEventListener("input", renderThreats);
+  document.getElementById("severityFilter").addEventListener("change", renderThreats);
+  renderThreats();
 }
 
-/* ==========================================
-   SEARCH
-========================================== */
+// A threat is shown only if it matches both the search text and the severity.
+function getVisibleThreats() {
+  const searchText = document.getElementById("threatSearch").value.toLowerCase().trim();
+  const severity = document.getElementById("severityFilter").value;
 
-function initializeThreatSearch() {
-  if (!threatSearchInput) {
-    return;
-  }
-
-  threatSearchInput.addEventListener("input", filterThreats);
+  return THREATS.filter((threat) => {
+    const allText = [threat.id, threat.type, threat.severity, threat.status, threat.source, threat.time]
+      .join(" ")
+      .toLowerCase();
+    const matchesSearch = allText.includes(searchText);
+    const matchesSeverity = severity === "All Severity" || threat.severity === severity;
+    return matchesSearch && matchesSeverity;
+  });
 }
 
-/* ==========================================
-   FILTER
-========================================== */
+function renderThreats() {
+  const visibleThreats = getVisibleThreats();
 
-function initializeThreatFilter() {
-  if (!severityFilter) {
-    return;
-  }
+  const rows = visibleThreats.map((threat) => {
+    const row = el("tr");
+    const statusCell = el("td");
+    statusCell.append(el("span", { className: `status ${threat.statusClass}`, text: threat.status }));
 
-  severityFilter.addEventListener("change", filterThreats);
-}
-
-/* ==========================================
-   THREAT FILTERING
-========================================== */
-
-function filterThreats() {
-  if (!threatSearchInput || !severityFilter || !noThreatsFound) {
-    return;
-  }
-
-  const searchValue = threatSearchInput.value.toLowerCase().trim();
-
-  const selectedSeverity = severityFilter.value.toLowerCase();
-
-  let visibleRows = 0;
-
-  threatRows.forEach((row) => {
-    const rowText = row.textContent.toLowerCase();
-
-    const severity = row.children[2].textContent.toLowerCase();
-
-    const matchesSearch = rowText.includes(searchValue);
-
-    const matchesSeverity =
-      selectedSeverity === "all severity" || severity === selectedSeverity;
-
-    const visible = matchesSearch && matchesSeverity;
-
-    row.style.display = visible ? "" : "none";
-
-    if (visible) {
-      visibleRows++;
-    }
+    row.append(
+      el("td", { text: threat.id }),
+      el("td", { text: threat.type }),
+      el("td", { text: threat.severity }),
+      statusCell,
+      el("td", { text: threat.source }),
+      el("td", { text: threat.time }),
+    );
+    return row;
   });
 
-  noThreatsFound.classList.toggle("hidden", visibleRows > 0);
+  document.getElementById("threatsTableBody").replaceChildren(...rows);
+  document.getElementById("noThreatsFound").classList.toggle("hidden", visibleThreats.length > 0);
 }

@@ -1,290 +1,142 @@
-/* ==========================================
-   DOM ELEMENTS
-========================================== */
+// users.js
+// User Management: add, view, edit and delete (CRUD).
+// The "users" array is the real data. After every change we save it and redraw the table.
 
-const usersTableBody = document.getElementById("usersTableBody");
+const DEFAULT_USERS = [
+  { name: "Faizan Khan", department: "Security", role: "Administrator", status: "Active", lastLogin: "Today" },
+];
 
-const addUserBtn = document.getElementById("addUserBtn");
-
-const noUsersFound = document.getElementById("noUsersFound");
-
-/* ==========================================
-   USER MANAGEMENT INITIALIZATION
-========================================== */
+let users = [];
 
 function initializeUsers() {
+  users = load(STORAGE_KEYS.users, DEFAULT_USERS);
+  renderUsers();
 
-  loadUsers();
+  document.getElementById("addUserBtn").addEventListener("click", addUser);
 
-  initializeAddUser();
+  // Event delegation: one listener on the table body handles the buttons of every row,
+  // including rows that are added later.
+  document.getElementById("usersTableBody").addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+    if (!button) return;
 
-  initializeViewUser();
+    const index = Number(button.closest("tr").dataset.index);
 
-  initializeEditUser();
-
-  initializeDeleteUser();
-
-  updateEmptyState();
-}
-
-
-function initializeAddUser() {
-  if (!addUserBtn) {
-    return;
-  }
-
-  addUserBtn.addEventListener("click", () => {
-    showUserForm(
-      "Add User",
-
-      {},
-
-      (user) => {
-        const userRow = createUserRow(
-          user.name,
-
-          user.department,
-
-          user.role,
-        );
-
-        usersTableBody.appendChild(userRow);
-
-        saveUsers();
-
-        updateEmptyState();
-
-        showToast("User added successfully.");
-      },
-    );
+    if (button.classList.contains("view-btn")) viewUser(index);
+    if (button.classList.contains("edit-btn")) editUser(index);
+    if (button.classList.contains("delete-btn")) deleteUser(index);
   });
 }
 
-function initializeViewUser() {
-  if (!usersTableBody) {
-    return;
-  }
+function saveAndRenderUsers() {
+  save(STORAGE_KEYS.users, users);
+  renderUsers();
+}
 
-  usersTableBody.addEventListener("click", (event) => {
-    if (!event.target.classList.contains("view-btn")) {
-      return;
-    }
+function renderUsers() {
+  const rows = users.map((user, index) => {
+    const row = el("tr");
+    row.dataset.index = index; // remembers which user this row belongs to
 
-    const userRow = event.target.closest("tr");
+    const statusCell = el("td");
+    statusCell.append(el("span", { className: "status active", text: user.status }));
 
-    if (!userRow) {
-      return;
-    }
-
-    const userData = getUserData(userRow);
-
-    showAlert(
-      "User Details",
-
-      `
-        <p><strong>Name:</strong> ${userData.name}</p>
-
-        <p><strong>Department:</strong> ${userData.department}</p>
-
-        <p><strong>Role:</strong> ${userData.role}</p>
-
-        <p><strong>Status:</strong> ${userData.status}</p>
-
-        <p><strong>Last Login:</strong> ${userData.lastLogin}</p>
-    `
+    const actionCell = el("td");
+    actionCell.append(
+      el("button", { type: "button", className: "btn view-btn", text: "View" }),
+      " ",
+      el("button", { type: "button", className: "btn edit-btn", text: "Edit" }),
+      " ",
+      el("button", { type: "button", className: "btn delete-btn", text: "Delete" }),
     );
+
+    row.append(
+      el("td", { text: user.name }),
+      el("td", { text: user.department }),
+      el("td", { text: user.role }),
+      statusCell,
+      el("td", { text: user.lastLogin }),
+      actionCell,
+    );
+    return row;
+  });
+
+  document.getElementById("usersTableBody").replaceChildren(...rows);
+  document.getElementById("noUsersFound").classList.toggle("hidden", users.length > 0);
+}
+
+function addUser() {
+  showUserForm("Add User", {}, (details) => {
+    users.push({ ...details, status: "Active", lastLogin: "Just Now" });
+    saveAndRenderUsers();
+    showToast("User added successfully.");
   });
 }
 
+function viewUser(index) {
+  const user = users[index];
+  const lines = [
+    ["Name", user.name],
+    ["Department", user.department],
+    ["Role", user.role],
+    ["Status", user.status],
+    ["Last Login", user.lastLogin],
+  ];
 
-function initializeEditUser() {
-  if (!usersTableBody) {
-    return;
-  }
+  const content = lines.map(([label, value]) => {
+    const line = el("p");
+    line.append(el("strong", { text: `${label}:` }), ` ${value}`);
+    return line;
+  });
 
-  usersTableBody.addEventListener("click", (event) => {
-    if (!event.target.classList.contains("edit-btn")) {
-      return;
-    }
+  showAlert("User Details", content);
+}
 
-    const userRow = event.target.closest("tr");
-
-    if (!userRow) {
-      return;
-    }
-
-    const userData = getUserData(userRow);
-
-    showUserForm(
-      "Edit User",
-
-      userData,
-
-      (user) => {
-        updateUserRow(
-          userRow,
-
-          user.name,
-
-          user.department,
-
-          user.role,
-        );
-
-        saveUsers();
-
-        showToast("User updated successfully.");
-      },
-    );
+function editUser(index) {
+  showUserForm("Edit User", users[index], (details) => {
+    users[index] = { ...users[index], ...details };
+    saveAndRenderUsers();
+    showToast("User updated successfully.");
   });
 }
 
+function deleteUser(index) {
+  showConfirm("Delete User", "Are you sure you want to delete this user?", () => {
+    users.splice(index, 1);
+    saveAndRenderUsers();
+    showToast("User deleted successfully.");
+  });
+}
 
-function initializeDeleteUser() {
-  if (!usersTableBody) {
-    return;
-  }
+// The same form is used for Add and Edit. For Edit it is filled with the current values.
+function showUserForm(title, user, onSave) {
+  const fields = [
+    { key: "name", id: "modalName", placeholder: "Full Name" },
+    { key: "department", id: "modalDepartment", placeholder: "Department" },
+    { key: "role", id: "modalRole", placeholder: "Role" },
+  ];
 
-  usersTableBody.addEventListener("click", (event) => {
-    if (!event.target.classList.contains("delete-btn")) {
-      return;
-    }
+  const inputs = fields.map((field) => {
+    const input = el("input", { type: "text" });
+    input.id = field.id;
+    input.placeholder = field.placeholder;
+    input.value = user[field.key] || "";
+    return input;
+  });
 
-    const userRow = event.target.closest("tr");
+  openModal({
+    title,
+    content: inputs,
+    confirmText: "Save",
+    onConfirm: () => {
+      const [name, department, role] = inputs.map((input) => input.value.trim());
 
-    if (!userRow) {
-      return;
-    }
-
-    showConfirm(
-      "Delete User",
-
-      "Are you sure you want to delete this user?",
-
-      () => {
-        userRow.remove();
-
-        saveUsers();
-
-        updateEmptyState();
-
-        showToast("User deleted successfully.");
+      if (!name || !department || !role) {
+        showToast("Please fill in all fields.", "error");
+        return false; // keep the form open so the user can fix it
       }
-    );
-  });
-}
 
-function updateEmptyState() {
-  if (!usersTableBody || !noUsersFound) {
-    return;
-  }
-
-  const remainingUsers = usersTableBody.querySelectorAll("tr").length;
-
-  if (remainingUsers === 0) {
-    noUsersFound.classList.remove("hidden");
-  } else {
-    noUsersFound.classList.add("hidden");
-  }
-}
-
-function getUserData(userRow) {
-  const cells = userRow.querySelectorAll("td");
-
-  return {
-    name: cells[0].textContent.trim(),
-
-    department: cells[1].textContent.trim(),
-
-    role: cells[2].textContent.trim(),
-
-    status: cells[3].textContent.trim(),
-
-    lastLogin: cells[4].textContent.trim(),
-  };
-}
-
-function updateUserRow(userRow, name, department, role) {
-  const cells = userRow.querySelectorAll("td");
-
-  cells[0].textContent = name;
-
-  cells[1].textContent = department;
-
-  cells[2].textContent = role;
-}
-
-function createUserRow(name, department, role) {
-  const row = document.createElement("tr");
-
-  row.innerHTML = `
-        <td>${name}</td>
-        <td>${department}</td>
-        <td>${role}</td>
-        <td>
-            <span class="status active">
-                Active
-            </span>
-        </td>
-        <td>Just Now</td>
-        <td>
-            <button type="button" class="btn view-btn">
-                View
-            </button>
-
-            <button type="button" class="btn edit-btn">
-                Edit
-            </button>
-
-            <button type="button" class="btn delete-btn">
-                Delete
-            </button>
-        </td>
-    `;
-
-  return row;
-}
-
-/* ==========================================
-   LOCAL STORAGE
-========================================== */
-
-function saveUsers() {
-  const users = [];
-
-  const rows = usersTableBody.querySelectorAll("tr");
-
-  rows.forEach((row) => {
-    const userData = getUserData(row);
-
-    users.push(userData);
-  });
-
-  localStorage.setItem("dashboardUsers", JSON.stringify(users));
-}
-
-
-
-function loadUsers() {
-  const users = JSON.parse(localStorage.getItem("dashboardUsers"));
-
-  if (!users) {
-    return;
-  }
-
-  usersTableBody.innerHTML = "";
-
-  users.forEach((user) => {
-    const row = createUserRow(user.name, user.department, user.role);
-
-    row.querySelectorAll("td")[3].innerHTML = `
-            <span class="status active">
-                ${user.status}
-            </span>
-        `;
-
-    row.querySelectorAll("td")[4].textContent = user.lastLogin;
-
-    usersTableBody.appendChild(row);
+      onSave({ name, department, role });
+    },
   });
 }

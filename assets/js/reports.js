@@ -1,83 +1,29 @@
-/* ==========================================
-   DOM ELEMENTS
-========================================== */
+// reports.js
+// The three download buttons. This version only shows the steps of a download;
+// it does not create a real file.
 
-const downloadPdfBtn = document.getElementById("downloadPdfBtn");
-
-const downloadExcelBtn = document.getElementById("downloadExcelBtn");
-
-const downloadCsvBtn = document.getElementById("downloadCsvBtn");
-
-/* ==========================================
-   REPORTS INITIALIZATION
-========================================== */
+const REPORT_BUTTONS = [
+  { id: "downloadPdfBtn", format: "PDF" },
+  { id: "downloadExcelBtn", format: "Excel" },
+  { id: "downloadCsvBtn", format: "CSV" },
+];
 
 function initializeReports() {
-  initializeDownloadPDF();
-
-  initializeDownloadExcel();
-
-  initializeDownloadCSV();
-}
-
-function initializeDownloadPDF() {
-  if (!downloadPdfBtn) {
-    return;
+  for (const report of REPORT_BUTTONS) {
+    const button = document.getElementById(report.id);
+    button.addEventListener("click", () => simulateDownload(button, report.format));
   }
-
-  downloadPdfBtn.addEventListener("click", () => {
-    simulateDownload(
-      downloadPdfBtn,
-      "Generating PDF Report...",
-      "PDF Report Downloaded Successfully!",
-    );
-  });
 }
 
-function initializeDownloadExcel() {
-  if (!downloadExcelBtn) {
-    return;
-  }
-
-  downloadExcelBtn.addEventListener("click", () => {
-    simulateDownload(
-      downloadExcelBtn,
-      "Generating Excel Report...",
-      "Excel Report Downloaded Successfully!",
-    );
-  });
-}
-
-function initializeDownloadCSV() {
-  if (!downloadCsvBtn) {
-    return;
-  }
-
-  downloadCsvBtn.addEventListener("click", () => {
-    simulateDownload(
-      downloadCsvBtn,
-      "Generating CSV Report...",
-      "CSV Report Downloaded Successfully!",
-    );
-  });
-}
-
-/* ==========================================
-   HELPER FUNCTIONS
-========================================== */
-
-function simulateDownload(button, loadingText, successMessage) {
+function simulateDownload(button, format) {
   const originalText = button.textContent;
 
   button.disabled = true;
-
-  button.textContent = loadingText;
+  button.textContent = `Generating ${format} Report...`;
 
   setTimeout(() => {
     button.disabled = false;
-
     button.textContent = originalText;
-
-    showToast(successMessage);
+    showToast(`${format} Report Downloaded Successfully!`);
   }, 1500);
 }

@@ -1,149 +1,58 @@
-/* ==========================================
-   DOM ELEMENTS
-========================================== */
+// settings.js
+// The settings page and dark mode. Every change is saved immediately.
 
-const notificationsToggle = document.getElementById("notificationsToggle");
-
-const autoLogoutToggle = document.getElementById("autoLogoutToggle");
-
-const twoFactorToggle = document.getElementById("twoFactorToggle");
-
-const darkModeToggle = document.getElementById("darkModeToggle");
-
-const themeToggleBtn = document.getElementById("themeToggleBtn");
-
-const darkModeIcon = themeToggleBtn?.querySelector("i");
-
-/* ==========================================
-   SETTINGS INITIALIZATION
-========================================== */
+// The three simple on/off settings. Dark mode is handled separately because it changes the page.
+const SETTING_TOGGLES = [
+  { id: "notificationsToggle", key: "notifications", label: "Notifications" },
+  { id: "autoLogoutToggle", key: "autoLogout", label: "Auto Logout" },
+  { id: "twoFactorToggle", key: "twoFactor", label: "Two-Factor Authentication" },
+];
 
 function initializeSettings() {
-  initializeNotifications();
+  const saved = load(STORAGE_KEYS.settings, {});
 
-  initializeAutoLogout();
+  for (const toggle of SETTING_TOGGLES) {
+    const checkbox = document.getElementById(toggle.id);
+    checkbox.checked = Boolean(saved[toggle.key]);
 
-  initializeTwoFactor();
-
-  initializeDarkMode();
-
-  loadSettings();
-}
-
-function initializeNotifications() {
-  if (!notificationsToggle) {
-    return;
+    checkbox.addEventListener("change", () => {
+      showToast(`${toggle.label} ${checkbox.checked ? "Enabled" : "Disabled"}`);
+      saveSettings();
+    });
   }
 
-  notificationsToggle.addEventListener("change", () => {
-    const status = notificationsToggle.checked ? "Enabled" : "Disabled";
+  setDarkMode(Boolean(saved.darkMode));
 
-    // alert(`Notifications ${status}`);
-    showToast(`Notifications ${status}`);
+  document.getElementById("darkModeToggle").addEventListener("change", (event) => {
+    setDarkMode(event.target.checked);
     saveSettings();
   });
+
+  document.getElementById("themeToggleBtn").addEventListener("click", toggleDarkMode);
 }
 
-function initializeAutoLogout() {
-  if (!autoLogoutToggle) {
-    return;
-  }
-
-  autoLogoutToggle.addEventListener("change", () => {
-    const status = autoLogoutToggle.checked ? "Enabled" : "Disabled";
-
-    // alert(`Auto Logout ${status}`);
-    showToast(`Auto Logout ${status}`);
-    saveSettings();
-  });
+function isDarkMode() {
+  return document.body.classList.contains("dark-mode");
 }
 
-function initializeTwoFactor() {
-  if (!twoFactorToggle) {
-    return;
-  }
-
-  twoFactorToggle.addEventListener("change", () => {
-    const status = twoFactorToggle.checked ? "Enabled" : "Disabled";
-
-    // alert(`Two-Factor Authentication ${status}`);
-    showToast(`Two-Factor Authentication ${status}`);
-    saveSettings();
-  });
-}
-
-function initializeDarkMode() {
-  if (!darkModeToggle) {
-    return;
-  }
-
-  darkModeToggle.addEventListener("change", () => {
-    updateDarkMode(darkModeToggle.checked);
-    saveSettings();
-  });
-}
-
-function updateDarkMode(isDark) {
+// The one place that changes the theme. It keeps the page, the checkbox and the header icon in step.
+function setDarkMode(isDark) {
   document.body.classList.toggle("dark-mode", isDark);
-
-  darkModeToggle.checked = isDark;
-
-  if (darkModeIcon) {
-    darkModeIcon.className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
-  }
+  document.getElementById("darkModeToggle").checked = isDark;
+  document.querySelector("#themeToggleBtn i").className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
 }
 
-
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener("click", () => {
-      // console.log("Moon clicked");
-
-    updateDarkMode(!document.body.classList.contains("dark-mode"));
-    saveSettings();
-  });
+function toggleDarkMode() {
+  setDarkMode(!isDarkMode());
+  saveSettings();
 }
-
-/* ==========================================
-   LOCAL STORAGE
-========================================== */
 
 function saveSettings() {
+  const settings = { darkMode: isDarkMode() };
 
-    const settings = {
+  for (const toggle of SETTING_TOGGLES) {
+    settings[toggle.key] = document.getElementById(toggle.id).checked;
+  }
 
-        notifications: notificationsToggle.checked,
-
-        autoLogout: autoLogoutToggle.checked,
-
-        twoFactor: twoFactorToggle.checked,
-
-        darkMode: darkModeToggle.checked
-
-    };
-
-    localStorage.setItem(
-        "dashboardSettings",
-        JSON.stringify(settings)
-    );
-
-}
-
-function loadSettings() {
-
-    const settings = JSON.parse(
-        localStorage.getItem("dashboardSettings")
-    );
-
-    if (!settings) {
-        return;
-    }
-
-    notificationsToggle.checked = settings.notifications;
-
-    autoLogoutToggle.checked = settings.autoLogout;
-
-    twoFactorToggle.checked = settings.twoFactor;
-
-    updateDarkMode(settings.darkMode);
-
+  save(STORAGE_KEYS.settings, settings);
 }
